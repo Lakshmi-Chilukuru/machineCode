@@ -1,0 +1,52 @@
+<h3>{{title}}</h3>
+<h5>{{subTitle}}</h5>
+<p>Seats</p>
+<div class="seatMap" *ngFor="let seats of seatMap; let i = index; trackBy:trackByIndex">
+    <div class="seats" >
+        <div class="row"><span>{{seats[i].row}}</span></div>
+        
+        <div class="rowSeat" *ngFor="let seat of seats">
+            <button  [ngClass]="{
+            'regular':seat.type == 'Regular',
+            'vip': seat.type == 'VIP',
+            'premium' :seat.type == 'Premium',
+            'booked' :(seat.type == 'VIP' || seat.type == 'Premium' || seat.type == 'Regular') && seat.booked,
+            'selected' :seat.selected,
+            'space':seat.number == 6
+        }" (click)="selectedSeat(seat,i)" [disabled]="seat.booked" >{{seat.number}}</button>
+        </div>
+    </div>
+
+    
+</div>
+<div class="seatDesc">
+    <div class="seatsInfo "*ngFor="let info of seatsInfo">
+    <div class="seat" [ngClass]="{
+            'regular':info.type == 'Regular',
+            'vip': info.type == 'VIP',
+            'premium' :info.type == 'Premium',
+            'booked' :info.type == 'booked',
+            'selected' :info.type == 'selected',
+        }"></div>
+    <div class="info">{{info?.type}} <span *ngIf="info?.price">(&#8377;{{info?.price}})</span></div>
+    
+</div>
+</div>
+<div class="selectedSeats">
+    <p>Booking Summary</p>
+    <p *ngIf="selectedSeats.length <0 else seatsSelected">No Seats Selected.</p>
+
+</div>
+<ng-template #seatsSelected let i="index">
+    <p> Selected Seats: <span *ngFor="let s of selectedSeats" >{{s}} </span></p>
+    <div class=" " *ngIf="selectedSeats.length>0">
+         <p>No. of Seats: {{selectedSeats.length}}</p>
+         <p>Total Cost : {{this.totalCosting}}</p>
+    </div>
+</ng-template>
+
+
+<div class="bookTicket">
+    <button (click)="bookTicket(selectedSeats)" [disabled]="selectedSeats.length<=0">{{context}}</button>
+</div>
+
