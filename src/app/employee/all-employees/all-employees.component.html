@@ -1,0 +1,10 @@
+
+<p style="text-align: center;">Employee List</p>
+<hr>
+<div class="employee" *ngFor="let emp of employees">
+    <div class="name" (click)="getEmployee(emp)">
+        <p>{{emp.name}}</p>
+    </div>
+    <div class="close"></div>
+    
+</div>

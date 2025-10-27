@@ -1,0 +1,11 @@
+<p>Data-Details</p>
+<div class="emp-detail" *ngIf="employeeData else selectEmp">
+    <p>{{employeeData.name}} ({{employeeData.age}})</p>
+    <p>{{employeeData.address}} </p>
+    <p>{{employeeData.email}} </p>
+    <p>{{employeeData.mobile}} </p>
+    <p>{{employeeData.dob}} </p>
+</div>
+<ng-template #selectEmp>
+    <p> Click on Employee to View the Details</p>
+</ng-template>
