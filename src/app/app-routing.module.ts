@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NavigationComponent } from './navigation/navigation.component';
 import { MovieBookingComponent } from './movie-booking/movie-booking.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 
@@ -12,6 +11,10 @@ const routes: Routes = [
   },
   {
     path:'',pathMatch:"full",component:MovieBookingComponent
+  },
+  {
+    path:'emp',
+    loadChildren:()=>import('./employee/employee.module').then(x=>x.EmployeeModule)
   }
 ];
 
