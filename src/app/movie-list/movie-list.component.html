@@ -1,5 +1,5 @@
 <div class="movies grid">
-    <div class="movieCard" *ngFor="let movie of movies">
+    <div class="movieCard" *ngFor="let movie of movies" (click)="bookMovie(movie)">
         <div class="img">
             <img src={{movie.imageUrl}} alt="{{movie.id}}">
         </div>
@@ -9,3 +9,18 @@
         </div>
     </div>
 </div>
+
+<div class="movies flex">
+    <div class="movieCard" *ngFor="let movie of movies" (click)="bookMovie(movie)">
+        <div class="img">
+            <img src={{movie.imageUrl}} alt="{{movie.id}}">
+        </div>
+        <div class="details">
+            <p style="color: #000;font-weight: 500;">{{movie.name}}</p>
+            <p style="color: rgb(102, 102, 102);font-weight: normal;">{{movie.language}}</p>
+        </div>
+    </div>
+    
+</div>
+<button (click)="nextSlide()">Left</button>
+<button (click)="previousSlide()">Right</button>

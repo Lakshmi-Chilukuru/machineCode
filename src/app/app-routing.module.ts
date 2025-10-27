@@ -5,6 +5,7 @@ import { MovieBookingComponent } from './movie-booking/movie-booking.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 
 const routes: Routes = [
+  {path:'movieTicket/:id',component:MovieBookingComponent},
   {path:'movieTicket',component:MovieBookingComponent},
   {
     path:'movies',component:MovieListComponent
