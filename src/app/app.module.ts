@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MovieBookingComponent } from './movie-booking/movie-booking.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
+import { TimerComponent } from './timer/timer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     MovieBookingComponent,
-    MovieListComponent
+    MovieListComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

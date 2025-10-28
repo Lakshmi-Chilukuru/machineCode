@@ -1,0 +1,32 @@
+ul {
+  list-style-type: none;
+    li{
+        display: inline-block ;
+    }     
+    li:hover{
+        background-color: rgb(129, 161, 189);
+        color: #2f2828;
+        transition: 0.5s background-color ease-in-out;
+    }              /* space between items */
+}
+
+a{
+    text-decoration: none;
+    color: #ffffffd6;
+    display: block;
+    padding: 20px;
+    position: relative;
+}
+a::after{
+    content:'';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;;
+    height: 2px;
+    background-color: #e7e5e5;
+    transition: 0.3s width ease-out;
+}
+a:hover::after{
+    width: 100%;
+}

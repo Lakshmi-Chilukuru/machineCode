@@ -1,0 +1,33 @@
+
+<div class="page-center">
+    <div style="display:flex ;flex-direction: column; width: 300px;background-color: azure;height: 200px;">
+         <div style="text-align: center;">Countdown Timer</div>
+    <br>
+    <table style="width: 100%;text-align: center;">
+        <tr>
+            <td style="width: 33.33%;">Hours</td>
+            <td style="width: 33.33%;">Minutes</td>
+            <td style="width: 33.33%;">Seconds</td>
+        </tr>
+        <tr>
+            <td >
+                <input type="number" name="hoursTimer" id="" value="{{hoursTimer}}" [(ngModel)]="hoursTimer"  style="width: 100px;">
+            </td>
+            <td>
+        <input type="number" name="minsTimer" id="" value="{{minsTimer}}" [(ngModel)]="minsTimer" style="width: 100px;">
+            </td>
+            <td>
+            <input type="number" name="secondsTimer" id="" value="{{secondsTimer}}" [(ngModel)]="secondsTimer" style="width: 100px;">
+            </td>
+        </tr>
+    </table>
+    <div class="btns">
+        <button class="start" (click)="startTime(hoursTimer,minsTimer,secondsTimer)">Start</button>
+    <button class="reset" (click)="resetTime()">Reset</button>
+    </div>
+    
+    </div>
+   
+    
+</div>
+
