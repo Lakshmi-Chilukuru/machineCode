@@ -6,50 +6,76 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./timer.component.less']
 })
 export class TimerComponent implements OnInit{
-  public hoursTimer:number=8;
+  public hoursTimer:any;
   public minsTimer:any
   public secondsTimer :any;
-
+  flag:boolean =false;
+  countDownTimer:any;
+  btnName:string ="Start";
   constructor(){
     
   }
   ngOnInit(): void {
-    this.hoursTimer =0;
-    this.minsTimer= 0;
-    this.secondsTimer = 0
+    this.hoursTimer ='00';
+    this.minsTimer='00';
+    this.secondsTimer = '00'
   }
   startTime(hoursTimer:number,minsTimer:string,secondsTimer:string){
-    this.hoursTimer = +hoursTimer;
-    this.minsTimer= +minsTimer;
-    this.secondsTimer =  +secondsTimer
-    if(this.minsTimer >= 0){
-      this.minsTimer =this.minsTimer -1;
-      this.secondsTimer =59
-      if(this.secondsTimer<=0){
-        this.secondsTimer=0
-      }
-      this.minsRun(this.minsTimer)
+    this.hoursTimer = hoursTimer;
+    this.minsTimer = +minsTimer;
+    this.secondsTimer = +secondsTimer;
+    
+    if(this.hoursTimer == 0 && this.minsTimer ==0 && this.secondsTimer == 0){
+      return
+      
     }
-    if(this.secondsTimer){
-      setInterval(()=>{
-        this.secondsTimer =this.secondsTimer-10
+    this.action()
+    
+  }
+  action(){
+    this.countDownTimer = setInterval(()=>{
+        this.timer()
       },1000)
+  }
+
+  timer(){
+    if(this.hoursTimer == 0 && this.minsTimer ==0 && this.secondsTimer == 0){
+      this.hoursTimer = 0;
+      this.minsTimer = 0;
+      this.secondsTimer = 0
+    }else if(this.secondsTimer!=0){
+      this.flag= true
+      this.secondsTimer =`${this.secondsTimer<=10?"0":""}${this.secondsTimer-1}`
+    }
+    else if(this.minsTimer !=0 && this.secondsTimer==0){
+      this.flag= true
+      this.secondsTimer =59
+      this.minsTimer =`${this.minsTimer<=10?"0":""}${this.minsTimer-1}`
+    }
+    else if(this.hoursTimer !=0 && this.secondsTimer ==0 && this.minsTimer ==0){
+      this.flag= true
+      this.minsTimer=59;
+      this.secondsTimer=59;
+      this.hoursTimer =`${this.hoursTimer<=10?"0":""}${this.hoursTimer-1}`
     }
     
+  }
+
+  stopInterval(state:any){
+    if(state == "pause"){
+      this.btnName='continue';
+      clearInterval(this.countDownTimer)
+    }
+    else if(this.btnName = "Continue"){
+      this.timer()
+    }
     
   }
-  minsRun(mins:number){
-    setInterval(()=>{
-      this.minsTimer--
-    },60000)
-       
-  }
-  
-
   
   resetTime(){
-    this.hoursTimer = 0;
-    this.minsTimer = 0;
-    this.secondsTimer = 0;
+    this.hoursTimer = '00';
+    this.minsTimer = '00';
+    this.secondsTimer = '00';
+    this.btnName = "Start"
   }
 }
