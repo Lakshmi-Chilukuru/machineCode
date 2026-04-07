@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource } from '@angular/material/table';
 import { Commenti } from './data';
 import { MainService } from '../service/main.service';
 
