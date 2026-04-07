@@ -1,16 +1,4 @@
 <div class="" style="background-color: black;">
-    <!-- <ul>
-        <li><a routerLink="/movieTicket" routerLinkActive="active">Movie Booking</a></li>
-        <li><a routerLink="/movies" routerLinkActive="active">Movies</a></li>
-        <li><a routerLink="/emp" routerLinkActive="active">Employees Data</a></li>
-        <li><a routerLink="/timer" routerLinkActive="active">Timer</a></li>
-        <li><a routerLink="/folder" routerLinkActive="active">Folder</a></li>
-        <li><a routerLink="/userForm" routerLinkActive="active">Rt-Forms</a></li> 
-        <li><a routerLink="/formData" routerLinkActive="active">FormData</a></li>  
-        <li><a routerLink="/material" routerLinkActive="active">Material</a></li>     
-        <li><a routerLink="/async" routerLinkActive="active">Async</a></li> 
-        <li><a routerLink="/async2" routerLinkActive="active">Async2</a></li>   
-    </ul> -->
     <ul>
         <li *ngFor="let link of selectedMenuList" >
             <a [routerLink]="link.path">{{link.title}}</a>
