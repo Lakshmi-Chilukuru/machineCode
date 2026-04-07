@@ -1,0 +1,96 @@
+<div>
+    <button (click)="add()">Add</button>
+</div>
+
+<!-- Load Skeleton -->
+ <h3>Load Skeleton</h3>
+ <div *ngIf="loading">
+  <div class="skeleton" *ngFor="let item of [1,2,3,4,5]"></div>
+</div>
+
+<div *ngIf="!loading">
+  <div *ngFor="let item of datr">
+    {{ item.name }}
+  </div>
+</div>
+<table>
+    <tr>
+        <th>Sr.No</th>
+        <th>Name</th>
+        <th>User Name</th>
+        <th>e-mail id</th>
+        <th>phone</th>
+        <th>website</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let user of userData$ | async">
+        <td>{{user.id}}</td>
+        <td><div *ngIf="user.isEdit"><input type="text" [ngModel]="user.name">
+            </div>{{user.name}}</td>
+        <td><div *ngIf="user.isEdit"><input type="text" [ngModel]="user.userName">
+            </div>{{user.userName}}</td>
+        <td><div *ngIf="user.isEdit"><input type="text" [ngModel]="user.mail">
+            </div>{{user.mail}}</td>
+        <td><div *ngIf="user.isEdit"><input type="text" [ngModel]="user.phone">
+            </div>{{user.phone}}</td>
+        <td><div *ngIf="user.isEdit"><input type="text" [ngModel]="user.website">
+            </div>{{user.website}}</td>
+        <td><button (click)="editData(user)">Edit</button></td>
+        <td><button (click)="deleteUser(user)">Delete</button></td>
+    </tr>
+</table>
+
+<select name="" id="">
+    <option [value]="item.id" *ngFor="let item of data">{{item.name}}</option>
+</select>
+
+
+
+
+
+//infinite scroll
+// debounced search
+// loading skeletons
+// toast notification
+// modal dialouges 
+// drag and drop
+// 
+
+// infintite scroll
+
+<h3>Infinite Data with Table</h3>
+<table class="table2">
+    <tr>
+        <th>Id</th>
+        <th>Post ID</th>
+        <th>Comment</th>
+    </tr>
+    <tr *ngFor="let post of comments$ | async">
+        <td>{{post.id}}</td>
+        <td>{{post.postId}}</td>
+        <td>{{post.name}}</td>
+    </tr>
+</table>
+
+<h3>Infinite Data with Cdk Virtual Scroll</h3>
+
+<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+  <div *cdkVirtualFor="let post of comments$ | async">
+    <p>{{post.id}} |
+        {{post.postId}} |
+        {{post.name}}</p>
+  </div>
+</cdk-virtual-scroll-viewport>
+
+<h3>Debounced Search</h3>
+<form action="">
+    <input type="text" name="commentText" id="commentText" [formControl]="searchText" >
+</form>
+
+<!-- //template form -->
+<input type="text" name="" id="" [(ngModel)]="searchTextTf" (input)="ondebounce($event)">
+
+<h3>Drag and Drop</h3>
+<!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let movie of userData$ | async" cdkDrag>{{movie}}</div>
+</div> -->

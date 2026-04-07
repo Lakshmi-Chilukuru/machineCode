@@ -1,0 +1,16 @@
+<input type="file" name="Doc" id="file_23" (change)="uploadFile($event)">
+<div class="" *ngIf="images.length">
+    <img [src]="sourc" alt="Image"  width="100px" height="100px" *ngFor="let sourc of images">
+</div>
+
+<h3>Dependent Dropdown</h3>
+<select name="states" id="" (change)="selectState($event)">
+    <option value="">Select State</option>
+    <option [value]="state.keyValue" *ngFor="let state of states">{{state.keyCode}}</option>    
+</select>   
+
+<select name="district" id="district">
+    <option value="NP" *ngIf="filteredDistricts.length<=0">Select State to have Disticts</option>
+    <option value="" *ngIf="filteredDistricts.length>0">Select district</option>
+    <option [value]="district.keyValue" *ngFor="let district of filteredDistricts">{{district.keyCode}}</option>
+</select>

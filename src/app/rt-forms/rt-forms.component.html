@@ -1,0 +1,325 @@
+<!-- reactive are preferred when you want the scalability, performance and control -->
+ <!-- Reactive Forms are code-driven -->
+  <!-- 
+            FormArray = a list of form controls or form groups whose length can change at runtime
+            Think:
+            Add / Remove fields dynamically
+            Unknown number of inputs
+            Repeating sections
+        -->
+  <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="firstName">
+        <label for="firstName" id="firstName">firstName</label>
+        <input type="firstName" name="firstName" formControlName="firstName">
+        <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.errors">
+            <small *ngIf="registerForm.get('firstName')?.errors?.['required']">
+                FirstName is Required
+            </small>
+            <small *ngIf="registerForm.get('firstName')?.errors?.['minlength']">
+                Name should be minLength of 5 Characters.
+            </small>
+            <small *ngIf="registerForm.get('firstName')?.errors?.['pattern']">
+                Numbers are not allowed to enter in this field 
+            </small>
+        </div>
+    </div>
+    <div class="mail">
+        <label for="mail" id="mail">Mail id</label>
+        <input type="mail" name="mail" formControlName="mail">
+        <div *ngIf="registerForm.get('mail')?.touched && registerForm.get('mail')?.errors">
+            <small *ngIf="registerForm.get('mail')?.errors?.['required']">
+                Mail Id is Required
+            </small>
+        <small *ngIf="registerForm.get('mail')?.errors?.['email']">
+                Valid Mail Id need to be entered
+            </small>            
+        </div>
+    </div>
+    <div class="mobNo">
+        <label for="contact">Contact No.</label>
+        <input type="text" name="contact" id="contact" formControlName="contact">
+        <div *ngIf="registerForm.get('contact')?.touched && registerForm.get('contact')?.errors">
+            <small *ngIf="registerForm.get('contact')?.errors?.['required']">
+                Contact is Required
+            </small>
+            <small *ngIf="registerForm.get('contact')?.errors?.['pattern']">
+                Text is not allowed to enter in this field 
+            </small>
+        </div>
+    </div>
+    <div class="password">
+        <label for="password" id="password">Password</label>
+        <input type="password" name="password" formControlName="password">
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors">
+            <small *ngIf="registerForm.get('password')?.errors?.['required']">
+                Password is Required
+            </small>
+        </div>
+    </div>
+    <div class="confirmPassword">
+        <label for="confirmPassword" id="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword">
+         <div *ngIf="
+            registerForm.errors?.['passwordValidator'] &&
+            registerForm.get('confirmPassword')?.touched
+        ">
+            Passwords do not match
+        </div>
+    </div>
+    <div class="skills" formArrayName="skills">
+        
+        <label for="skills" id="skills" name="skills">Skills</label>
+        <button (click)="addSkill()">Add Skills</button>
+        <div class="" *ngFor="let skill of skills.controls;let i=index">
+            <input [formControlName]="i" placeholder="Enter a Skills">
+            <button type="button" (click)="removeSkill(i)">Remove</button>
+        </div>
+    </div>
+        
+    <button type="submit" [disabled]="registerForm.invalid">Submit</button>
+  </form> -->
+
+  <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+    <div class="flex">
+        <div class="input-field">
+        <label for="firstName" id="firstName">First Name</label> <br>
+        <input type="text" name="firstName" id="firstName" formControlName="fName">
+         <div *ngIf="applicationForm.get('fName')?.touched && applicationForm.get('fName')?.errors">
+            <small *ngIf="applicationForm.get('fName')?.errors?.['required']">
+                FirstName is Required
+            </small>
+        </div>
+    </div>
+     <div class="input-field">
+        <label for="middleName" id="middleName">Middle Name</label> <br>
+        <input type="text" name="middleName" id="middleName" formControlName="mName">
+         <div *ngIf="applicationForm.get('mName')?.touched && applicationForm.get('mName')?.errors">
+            <small *ngIf="applicationForm.get('mName')?.errors?.['required']">
+                MiddleName is Required
+            </small>
+        </div>
+    </div>
+     <div class="input-field">
+        <label for="lastName" id="lastName">Last Name</label> <br>
+        <input type="text" name="lastName" id="lastName" formControlName="lName">
+         <div *ngIf="applicationForm.get('lName')?.touched && applicationForm.get('lName')?.errors">
+            <small *ngIf="applicationForm.get('lName')?.errors?.['required']">
+                LastName is Required
+            </small>
+        </div>
+    </div>
+    </div>
+    
+     <div class="input-field">
+        <label for="fullName" id="fullName">Full Name</label> <br>
+        <input type="text" name="fullName" id="fullName" formControlName="fullName">
+    </div>
+    <div class="flex">
+        <div class="input-field">
+        <label for="isWorking" id="isWorking">Working</label> <br>
+        <input type="radio" name="isWorking" id="working" value="Yes" formControlName="isWorking">Working
+        <input type="radio" name="isWorking" id="notWorking" value="No" formControlName="isWorking">Not Working
+    </div>
+    <div class="flex" *ngIf="work?.value == 'Yes'">
+        <div class="input-field">
+        <label for="jobType" id="jobType">JobType</label> <br>
+        <select name="jobType" id="jobType" formControlName="jobType">
+            <option value="">Select...</option>
+            <option value="business">Business</option>
+            <option value="salaried">Salaried</option>
+        </select>
+    </div>
+     <div class="input-field">
+        <label for="isOwnBusiness" id="isOwnBusiness">Own Business</label> <br>
+        <input type="radio" name="isOwnBusiness" id="isOwnBusiness" value="Yes" formControlName="isOwnBusiness">Yes
+        <input type="radio" name="isOwnBusiness" id="isOwnBusiness" value="No" formControlName="isOwnBusiness">No
+    </div>
+    </div>
+     
+    </div>
+    <div *ngIf="jobT?.value == 'salaried'">
+        <!-- <app-sub-form [group]="applicationForm.get('companyDetails')"></app-sub-form> -->
+        
+<div #container>
+    
+</div>
+        <div class="companyGroup flex" formGroupName="companyDetails">
+        <div class="input-field">
+        <label for="companyName" id="companyName">Company Name</label> <br>
+        <input type="text" name="companyName" id="companyName" formControlName="companyName">
+         <div *ngIf="applicationForm.get('companyDetails.companyName')?.touched && applicationForm.get('companyName')?.errors">
+            <small *ngIf="applicationForm.get('companyName')?.errors?.['required']">
+                companyName is Required
+            </small>
+        </div>
+    </div>
+    <div class="input-field">
+        <label for="position" id="position">Position</label> <br>
+        <input type="text" name="position" id="position" formControlName="position">
+         <div *ngIf="applicationForm.get('position')?.touched && applicationForm.get('position')?.errors">
+            <small *ngIf="applicationForm.get('position')?.errors?.['required']">
+                Position is Required
+            </small>
+        </div>
+    </div>
+    <div class="input-field">
+        <label for="salary" id="salary">Salary</label> <br>
+        <input type="text" name="salary" id="salary" formControlName="salary" appCurrency>
+         <div *ngIf="applicationForm.get('salary')?.touched && applicationForm.get('salary')?.errors">
+            <small *ngIf="applicationForm.get('salary')?.errors?.['required']">
+                Please Provide the Salary Details...
+            </small>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div>
+        <div class="businessGroup flex" formGroupName="businessDetails" *ngIf="jobT?.value == 'business'" >
+        <div class="input-field">
+            <label for="businessType" id="businessType">Business Type</label> <br>
+            <input type="text" name="businessType" id="businessType" formControlName="businessType">
+            <div *ngIf="applicationForm.get('businessType')?.touched && applicationForm.get('businessType')?.errors">
+                <small *ngIf="applicationForm.get('businessType')?.errors?.['required']">
+                    Type of Business is Required
+                </small>
+            </div>
+        </div>
+        <div class="input-field">
+            <label for="businessName" id="businessName">Business Name</label> <br>
+            <input type="text" name="businessName" id="businessName" formControlName="businessName">
+            <div *ngIf="applicationForm.get('businessName')?.touched && applicationForm.get('businessName')?.errors">
+                <small *ngIf="applicationForm.get('businessName')?.errors?.['required']">
+                    Name of Business is Required
+                </small>
+            </div>
+        </div>
+        <div class="input-field">
+            <label for="annualIncome" id="annualIncome">Annual Income</label> <br>
+            <input type="text" name="annualIncome" id="annualIncome" formControlName="annualIncome">
+            <div *ngIf="applicationForm.get('annualIncome')?.touched && applicationForm.get('annualIncome')?.errors">
+                <small *ngIf="applicationForm.get('annualIncome')?.errors?.['required']">
+                    Please provide the Annual Income
+                </small>
+            </div>
+        </div>
+        <div class="input-field">
+            <label for="address" id="address">Address</label><br>
+            <textarea name="address" id="address" formControlName="address" placeholder="Please Share your Business Address"></textarea>
+        </div>
+    </div>
+    </div>
+    
+    <div class="flex">
+        <div class="input-field">
+        <label for="personalEmail" id="personalEmail">Personal Mail</label>
+        <input type="mail" name="personalEmail" formControlName="personalEmail">
+        <div *ngIf="applicationForm.get('personalEmail')?.touched && applicationForm.get('personalEmail')?.errors">
+            <small *ngIf="applicationForm.get('personalEmail')?.errors?.['required']">
+                Please Share your Personal Mail Id
+            </small>
+        <small *ngIf="registerForm.get('personalEmail')?.errors?.['email']">
+                Valid Mail Id need to be entered
+            </small>            
+        </div>                                                 
+    </div>
+    <div class="input-field">
+        <label for="businessEmail" id="businessEmail">Business Mail</label>
+        <input type="mail" name="businessEmail" formControlName="businessEmail">
+        <div *ngIf="applicationForm.get('businessEmail')?.touched && applicationForm.get('businessEmail')?.errors">
+            <small *ngIf="applicationForm.get('businessEmail')?.errors?.['required']">
+                Please Share your Business Mail Id
+            </small>
+        <small *ngIf="applicationForm.get('businessEmail')?.errors?.['email']">
+                Valid Mail Id need to be entered
+            </small>            
+        </div>
+    </div>
+    </div>
+    
+    <div class="contact-list" formArrayName="contactList">
+        <label for="contact" id="contact">Contact</label><br>
+        <button (click)="addContact()" type="button">Add Contact</button>
+        <div class="" *ngFor="let contact of contacts.controls;let i=index">
+            <input [formControlName]="i" class="{{contact}}-{{i}}">
+            <button type="button" (click)="removeContact(i)">Remove</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h3>SkillSet</h3>
+    <div class="flex" formArrayName="skillSet">
+        <div class="flex" *ngFor="let skill of skillSet.controls;let i= index">
+            <div class="" [formGroupName]="i">
+                <div class="input-list">
+            <label for="skill">Skill</label>
+            <select name="skills" id="skill" formControlName="skillName">
+                <option value="">Select...</option>
+                <option value="angular">Angular</option>
+                <option value="mongodb">MongoDB</option>
+                <option value="react">React</option>
+                <option value="node">Node.js</option>
+                <option value="express">Express</option>
+            </select>
+            </div>
+            <div class="input-list">
+                <label for="experience" id="experience">Experience</label>
+                <input type="text" id="experience" formControlName="experience" placeholder="Please mention you expereince">
+            </div>
+            <button (click)="removeSkills(i)">Remove</button>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+    <button (click)="addSkills()" type="button">Add Skill</button>
+    <div class="list" formArrayName="list">
+        <div class="" *ngFor="let l of lists.controls;let i=index"  [formGroupName]="i">
+            <input type="text" formControlName ="item">
+
+            <button (click)="removeList(i)" type="button">Remove List</button>
+        </div>
+        
+    </div>
+    <button (click)="addList()" type="button">Add List</button>
+
+
+    <section>
+        <div class="" formArrayName="studentDetails">
+            <div class="" *ngFor="let student of students.controls;let i=index;">
+                <div class="" [formGroupName]="i">
+                    <input type="text" formControlName="stName" placeholder="studentName">
+                    <input type="text" formControlName="stRoll" placeholder="Enter RollNumber">
+                <button (click)="removeStudent(i)">Remove</button>
+                </div>
+                
+                
+            </div>
+
+        </div>
+        <button (click)="addStudent()" type="button">Add Student</button>
+    </section>
+    <button type="submit" [disabled]="applicationForm.invalid">Submit</button>
+  </form>
+  
+  <!-- Template Dynamic form -->
+   <h3>Dynamic Form</h3>
+   <form >
+   <div *ngFor="let item of dynamicList; let i = index;trackBy: trackByIndex">
+    
+    <input 
+      [(ngModel)]="dynamicList[i]" 
+      name="item{{i}}" 
+      placeholder="Enter value"
+    >
+
+    <button type="button" (click)="removeitem(i)">❌</button>
+
+  </div>
+
+  <button type="button" (click)="addTemplateList()">➕ Add</button>
+
+  <br><br>
+
+  <button type="submit" (click)="onTemplateData()">Submit</button>
+   </form>

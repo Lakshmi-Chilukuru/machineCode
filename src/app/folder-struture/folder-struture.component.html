@@ -1,0 +1,61 @@
+<!-- <ng-container *ngIf="data else noData"> -->
+    <!-- <div class="" *ngFor="let node of data">
+        <ol>
+            <ng-container *ngTemplateOutlet="renderNode; context: { $implicit: node }"></ng-container>
+        </ol>
+    </div> -->
+    <!-- <ng-container *ngTemplateOutlet="renderNode,context:{$implicit:data}"></ng-container> -->
+    <!-- <ng-container *ngFor="let node of data"
+    [ngTemplateOutlet]="renderNode"
+    [ngTemplateOutletContext]="{$implicit:node}">
+    </ng-container> -->
+<!-- </ng-container> -->
+<!-- <ng-template #renderNode let-node>
+    <div class="" style="margin-left: 30px;display: flex;">
+        <div class="">
+             <li *ngIf="node.isFolder" (click)="showSubFiles(node.items)"> Folder:{{node.name}}</li>
+          <li *ngIf="!node.isFolder" > File:{{node.name}}</li>
+        </div>
+        <div class="btns" *ngIf="node.isFolder">
+            <button>Folder +</button>
+            <button>File +</button>
+        </div>
+    </div>
+    <div class="" *ngIf="showFile">
+        <div class="" *ngFor="let data of node.items">
+            <ul style="margin-left: 35px;">
+                <ng-container *ngTemplateOutlet="renderNode; context: { $implicit: data }"></ng-container>
+    
+            </ul>
+    
+        </div>
+    </div>
+</ng-template> -->
+<!-- <ng-template #noData></ng-template> -->
+
+
+<ng-container *ngIf="data else noData">
+    <div class="">
+        <ol *ngFor="let node of data">
+            <li style="margin-left: 20px;">
+                <ng-container 
+                *ngTemplateOutlet="subArray, context:{$implicit:node}"
+                ></ng-container>
+            </li>
+        </ol>
+    </div>
+</ng-container>
+<ng-template #subArray let-node>
+    <p *ngIf="node.isFolder">Folder:{{node.name}}</p>
+    <p *ngIf="!node.isFolder">File : {{node.name}}</p>
+    <ol *ngFor="let folder of node.items" style="margin-left: 20px;">
+         <li>
+                <ng-container 
+                *ngTemplateOutlet="subArray, context:{$implicit:folder}"
+                ></ng-container>
+            </li>
+    </ol>
+</ng-template>
+<ng-template #noData>
+
+</ng-template>

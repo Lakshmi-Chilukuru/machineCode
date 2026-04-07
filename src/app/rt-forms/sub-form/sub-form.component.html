@@ -1,0 +1,31 @@
+<p>From Sub-form</p>
+
+ <div class="companyGroup flex" formGroupName="group">
+        <div class="input-field">
+        <label for="companyName" id="companyName">Company Name</label> <br>
+        <input type="text" name="companyName" id="companyName" formControlName="companyName">
+         <div *ngIf="group.get('companyName')?.touched && group.get('companyName')?.errors">
+            <small *ngIf="group.get('companyName')?.errors?.['required']">
+                companyName is Required
+            </small>
+        </div>
+    </div>
+    <div class="input-field">
+        <label for="position" id="position">Position</label> <br>
+        <input type="text" name="position" id="position" formControlName="position">
+         <div *ngIf="group.get('position')?.touched && group.get('position')?.errors">
+            <small *ngIf="group.get('position')?.errors?.['required']">
+                Position is Required
+            </small>
+        </div>
+    </div>
+    <div class="input-field">
+        <label for="salary" id="salary">Salary</label> <br>
+        <input type="text" name="salary" id="salary" formControlName="salary">
+         <div *ngIf="group.get('salary')?.touched && group.get('salary')?.errors">
+            <small *ngIf="group.get('salary')?.errors?.['required']">
+                Please Provide the Salary Details...
+            </small>
+        </div>
+    </div>
+        </div>

@@ -1,0 +1,10 @@
+
+<ng-container *ngIf="!id"
+    [ngTemplateOutlet]="noData"
+    [ngTemplateOutletContext]="{$explicit:dataMsg}">
+</ng-container>
+
+<ng-template #noData let-data>
+    <p>{{dataMsg}}
+    </p>
+</ng-template>

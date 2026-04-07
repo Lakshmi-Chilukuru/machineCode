@@ -1,0 +1,45 @@
+<p>i18n works!</p>
+<div class="" *ngFor="let btn of buttons;let i=index">
+    <button (click)="showupdatedCount(i)">button {{btn.id}} - {{btn.displayCount}}</button>
+</div>
+<!-- https://www.naukri.com/angular-jobs?k=angular&nignbevent_src=jobsearchDeskGNB&experience=3&jobAge=3&cityTypeGid=17 -->
+
+<h2>NgRx</h2>
+
+<button (click)="increaseCount()">Increment</button>
+<p>Current Count : {{count$ | async}}</p>
+<button (click)="decrease()">Decrement</button>
+<button (click)="reset()">Reset</button>
+<!--  -->
+<p>-----------</p>
+<app-cp2></app-cp2>
+
+<h2>Total Loans: {{ totalLoans$ | async }}</h2>
+
+<h3>All Loans</h3>
+<ul>
+  <li *ngFor="let loan of loans$ | async">
+    {{ loan.id }} - {{ loan.amount }} - {{ loan.status }}
+
+    <button (click)="approve(loan.id)">Approve</button>
+    <button (click)="reject(loan.id)">Reject</button>
+  </li>
+</ul>
+
+<hr />
+
+<h3>Pending Loans</h3>
+<ul>
+  <li *ngFor="let loan of pendingLoans$ | async">
+    {{ loan.id }} - {{ loan.amount }}
+  </li>
+</ul>
+
+<hr />
+
+<h3>Approved Loans</h3>
+<ul>
+  <li *ngFor="let loan of approvedLoans$ | async">
+    {{ loan.id }} - {{ loan.amount }}
+  </li>
+</ul>

@@ -22,6 +22,7 @@ export class MovieListComponent implements OnInit,OnDestroy {
 
   bookMovie(movie:Movie){
     console.log(movie)
+    localStorage.setItem("selectedMovie",JSON.stringify(movie))
     this.router.navigate(['/movieTicket',movie.id])
   }
 

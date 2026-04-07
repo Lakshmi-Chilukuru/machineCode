@@ -1,0 +1,6 @@
+<p>async works!</p>
+<!-- //debouncing using rxjs  -->
+<input type="text" name="searchText" id="searchText"[formControl]=searchInput>
+<div *ngFor="let data of allData | async;trackBy:tackById">
+    <p>{{data.description}}</p>
+</div>

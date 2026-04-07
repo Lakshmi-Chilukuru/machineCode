@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Seat } from './model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-movie-booking',
   templateUrl: './movie-booking.component.html',
   styleUrls: ['./movie-booking.component.less'],
 })
-export class MovieBookingComponent implements OnInit {
+export class MovieBookingComponent implements OnInit,OnDestroy {
   public title: string = 'Movie Ticket Booking';
-  public subTitle: string = 'Debba Debba';
+  public subTitle: string ="";
   public rows: any = [];
   public rowsLength = 8;
   public seatPerRow = 12;
@@ -19,8 +21,18 @@ export class MovieBookingComponent implements OnInit {
   selectedSeats: any = [];
   totalCosting: number = 0;
   public context: any = 'Select Seats to Book';
-  constructor() {}
+  loading: boolean=false;
+  items: any;
+  page: any;
+  constructor(private _snackBar: MatSnackBar) {}
   ngOnInit(): void {
+    const savedMovie = localStorage.getItem('selectedMovie');
+    if(savedMovie){
+      const movieData= JSON.parse((savedMovie))
+
+      this.subTitle =movieData.name 
+      console.log(JSON.parse(savedMovie))
+    }
     this.rows = Array.from({ length: this.rowsLength }, (_, i) =>
       String.fromCharCode(65 + i)
     );
@@ -116,19 +128,30 @@ export class MovieBookingComponent implements OnInit {
   }
 
   bookTicket(seats: any) {
+    let message;
     if (seats.length == 1) {
-      alert(
-        `Successfully booked ${seats.length} seat for ₹${this.totalCosting}`
-      );
+      message = `Successfully booked ${seats.length} seat for ₹${this.totalCosting}`
+      // alert(
+      //   `Successfully booked ${seats.length} seat for ₹${this.totalCosting}`
+      // );
     } else {
-      alert(
-        `Successfully booked ${seats.length} seat(s) for ₹${this.totalCosting}`
-      );
+      message =  `Successfully booked ${seats.length} seat(s) for ₹${this.totalCosting}`
+      // alert(
+      //   `Successfully booked ${seats.length} seat(s) for ₹${this.totalCosting}`
+      // );
     }
+    this.openSnackBar(message)
     this.changeSeatColor(seats)
     this.selectedSeats.length = 0;
-    
-    
+  }
+  openSnackBar(message: string) {
+    this._snackBar.open(message);
+    setTimeout(()=>{
+      this._snackBar.dismiss()
+    },1000)
+  }
+  openSnackBari(){
+    this._snackBar.open("open bar")
   }
 
   changeSeatColor(seats:any){
@@ -141,5 +164,31 @@ export class MovieBookingComponent implements OnInit {
         });
       });
     });
+  }
+  onScroll(event: any) {
+  const { scrollTop, scrollHeight, clientHeight } = event.target;
+
+  if (scrollTop + clientHeight >= scrollHeight - 10) {
+    this.loadMore();
+    console.log("loadmore")
+  }
+}
+loadMore() {
+    this.loading = true;
+
+    setTimeout(() => {
+      this.items.push("helloe");
+      this.page++;
+      this.loading = false;
+    }, 1000);
+  }
+
+  getData(page: number) {
+    return Array.from({ length: 10 }, (_, i) => ({
+      name: `Item ${(page - 1) * 10 + i + 1}`
+    }));
+  }
+  ngOnDestroy(): void {
+    localStorage.clear()
   }
 }
